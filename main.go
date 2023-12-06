@@ -44,7 +44,9 @@ func Language(x_offset int16, y_offset int16, gradient_from string, gradient_to 
 			</linearGradient>
 		</defs>
 		<rect id="gradient-box%s" width="80" height="80" rx="20" fill="url(#linear-gradient%s)" />
+                <g transform="translate(20, 20)">
 		%s
+                </g>
 	</svg>
 	`, x_offset, y_offset, id, gradient_from, gradient_to, id, id, svg)
 }
