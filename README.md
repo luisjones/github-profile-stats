@@ -6,7 +6,13 @@ This project demonstrates showcasing your GitHub profile through an HTTP server 
 ## Installation
 
 1. **Clone the repository:**
-2. **Run HTTP server:**
+2. **Compile Go Binary**
+- Navigate to the project directory.
+- Run the Go's build command to compile the code into an executable file.
+  ```
+  go build
+  ```
+3. **Run HTTP server:**
 - Navigate to the project directory.
 - Run the Go program to start the server, which will start at `http://localhost:8081` by default. 
   ```
