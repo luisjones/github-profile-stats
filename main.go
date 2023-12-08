@@ -6,8 +6,16 @@ import (
 	"log"
 	"net/http"
 	"profile-svg/svg"
+	"strconv"
 	"strings"
 )
+
+type Language struct {
+	Name         string
+	GradientFrom string
+	GradientTo   string
+	SVG          string
+}
 
 type Body struct {
 	Title      string
@@ -26,10 +34,13 @@ func (b *Body) WithParagraph(paragraph string) *Body {
 	b.Paragraphs = append(b.Paragraphs, paragraph)
 	return b
 }
-func (b *Body) WithRow(content ...string) *Body {
+func (b *Body) WithRow(content ...Language) *Body {
+	//var numberOfRowElements = len(content)
+	var lowerXCounter = 10
 	var elements []*Element
-	for _, f := range content {
-		elements = append(elements, &Element{Content: f})
+	for elementNumber, element := range content {
+		elements = append(elements, &Element{Content: AddLanguage(lowerXCounter, 90, element.GradientFrom, element.GradientTo, strconv.Itoa(elementNumber), element.SVG)})
+		lowerXCounter += 100
 	}
 	row := &ElementRow{Elements: elements}
 	b.Rows = append(b.Rows, row)
@@ -92,10 +103,12 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 			svg.Paragraph("Frameworks", 200),
 		).
 		WithRow(
-			Language(10, 90, "#70D0ED", "#00CDBF", "1", svg.Read("./icons/languages/Go.svg")),
-			Language(110, 90, "#FFE693", "#E4A125", "2", svg.Read("./icons/languages/JavaScript.svg")),
-			Language(210, 90, "#AFD3FC", "#2E79C7", "3", svg.Read("./icons/languages/TypeScript.svg")),
-			Language(310, 90, "#AFD3FC", "#2E79C7", "4", svg.Read("./icons/languages/Python.svg")),
+			Language{"Go", "#70D0ED", "#00CDBF", svg.Read("./icons/languages/Go.svg")},
+			Language{"JavaScript", "#FFE693", "#E4A125", svg.Read("./icons/languages/JavaScript.svg")},
+			//Language(10, 90, "#70D0ED", "#00CDBF", "1", svg.Read("./icons/languages/Go.svg")),
+			//Language(110, 90, "#FFE693", "#E4A125", "2", svg.Read("./icons/languages/JavaScript.svg")),
+			//Language(210, 90, "#AFD3FC", "#2E79C7", "3", svg.Read("./icons/languages/TypeScript.svg")),
+			//Language(310, 90, "#AFD3FC", "#2E79C7", "4", svg.Read("./icons/languages/Python.svg")),
 		)
 
 	footer := "</svg>"
@@ -103,7 +116,7 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 	io.WriteString(w, svg)
 }
 
-func Language(x_offset int16, y_offset int16, gradient_from string, gradient_to string, id string, svg string) string {
+func AddLanguage(x_offset int, y_offset int16, gradient_from string, gradient_to string, id string, svg string) string {
 	return fmt.Sprintf(`
 	<svg width="80" height="80" x="%d" y="%d">
 		<defs>

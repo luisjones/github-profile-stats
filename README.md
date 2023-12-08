@@ -23,4 +23,4 @@ This project demonstrates showcasing your GitHub profile through an HTTP server 
 - Dynamically adjust SVG instead of relying on fixed dimensions
 - Profile statistics
 - Rounded corners
-- API Route Paramters
+- API Route Parameters
