@@ -89,9 +89,18 @@ func main() {
 	log.Println("Started Webserver on port :8081")
 }
 
+type IncomingRequest struct {
+	Languages  []string
+	Frameworks []string
+}
+
 func GenerateSVG(w http.ResponseWriter, req *http.Request) {
+	var requestData IncomingRequest
+	queryParameters := req.URL.Query()
+	languages := queryParameters.Get("languages")
+	requestData.Languages = strings.Split(languages, ",")
+
 	w.Header().Set("Content-Type", "image/svg+xml")
-	header := `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">`
 	body := NewBody().
 		WithTitle(
 			svg.Title("Skills", 44),
@@ -110,10 +119,7 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 			//Language(210, 90, "#AFD3FC", "#2E79C7", "3", svg.Read("./icons/languages/TypeScript.svg")),
 			//Language(310, 90, "#AFD3FC", "#2E79C7", "4", svg.Read("./icons/languages/Python.svg")),
 		)
-
-	footer := "</svg>"
-	svg := header + body.String() + footer
-	io.WriteString(w, svg)
+	io.WriteString(w, CreateSVG(1000, 1000, body.String()))
 }
 
 func AddLanguage(x_offset int, y_offset int16, gradient_from string, gradient_to string, id string, svg string) string {
@@ -131,4 +137,12 @@ func AddLanguage(x_offset int, y_offset int16, gradient_from string, gradient_to
                 </g>
 	</svg>
 	`, x_offset, y_offset, id, gradient_from, gradient_to, id, id, svg)
+}
+
+func CreateSVG(width int, height int, contents string) string {
+	return fmt.Sprintf(`
+	<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">
+	%s
+	</svg>
+	`, width, height, contents)
 }
