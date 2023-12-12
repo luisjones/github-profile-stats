@@ -95,10 +95,10 @@ type IncomingRequest struct {
 }
 
 func GenerateSVG(w http.ResponseWriter, req *http.Request) {
-	var requestData IncomingRequest
-	queryParameters := req.URL.Query()
-	languages := queryParameters.Get("languages")
-	requestData.Languages = strings.Split(languages, ",")
+	//var requestData IncomingRequest
+	//queryParameters := req.URL.Query()
+	//languages := queryParameters.Get("languages")
+	//requestData.Languages = strings.Split(languages, ",")
 
 	w.Header().Set("Content-Type", "image/svg+xml")
 	body := NewBody().
@@ -114,10 +114,13 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 		WithRow(
 			Language{"Go", "#70D0ED", "#00CDBF", svg.Read("./icons/languages/Go.svg")},
 			Language{"JavaScript", "#FFE693", "#E4A125", svg.Read("./icons/languages/JavaScript.svg")},
-			//Language(10, 90, "#70D0ED", "#00CDBF", "1", svg.Read("./icons/languages/Go.svg")),
-			//Language(110, 90, "#FFE693", "#E4A125", "2", svg.Read("./icons/languages/JavaScript.svg")),
-			//Language(210, 90, "#AFD3FC", "#2E79C7", "3", svg.Read("./icons/languages/TypeScript.svg")),
-			//Language(310, 90, "#AFD3FC", "#2E79C7", "4", svg.Read("./icons/languages/Python.svg")),
+                        Language{"TypeScript", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/TypeScript.svg")},
+                        Language{"Python", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/Python.svg")},
+                        Language{"Visual Basic", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/VisualBasic.svg")},
+                        Language{"HTML5", "#FDBAA2", "#F1652A", svg.Read("./icons/languages/HTML.svg")},
+			Language{"CSS3", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/CSS.svg")},
+                        Language{"Svelte", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Svelte.svg")},
+
 		)
 	io.WriteString(w, CreateSVG(1000, 1000, body.String()))
 }
