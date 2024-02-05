@@ -123,6 +123,10 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 		).
                 WithRow(
                         Language{"Svelte", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Svelte.svg")},
+                        Language{"Preact", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Preact.svg")},
+                        Language{"React", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/React.svg")},
+                        Language{"Ionic", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Ionic.svg")},
+
 
 		)
 	io.WriteString(w, CreateSVG(1000, 1000, body.String()))

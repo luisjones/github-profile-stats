@@ -2,7 +2,7 @@
 
 This project demonstrates showcasing your GitHub profile through an HTTP server using Go.
 Golang rewrite of [Jurredr's WidgetBox](https://github.com/Jurredr/github-widgetbox). (Visual output the same and using the same gradient colours)
-Icons are from [Simple Icons](https://simpleicons.org/).
+Icons are from [Simple Icons](https://simpleicons.org/), [DevIcon](https://devicon.dev/) and [Iconify](https://iconify.design/).
 
 ## Installation
 
