@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"profile-svg/svg"
-	"strconv"
 	"strings"
 )
 
@@ -35,11 +34,13 @@ func (b *Body) WithParagraph(paragraph string) *Body {
 	return b
 }
 func (b *Body) WithRow(content ...Language) *Body {
+        rows := 90 + (len(b.Rows) * 120)
 	//var numberOfRowElements = len(content)
 	var lowerXCounter = 10
 	var elements []*Element
 	for elementNumber, element := range content {
-		elements = append(elements, &Element{Content: AddLanguage(lowerXCounter, 90, element.GradientFrom, element.GradientTo, strconv.Itoa(elementNumber), element.SVG)})
+                id := fmt.Sprintf("%d_%d", len(b.Rows), elementNumber)
+		elements = append(elements, &Element{Content: AddLanguage(lowerXCounter, rows, element.GradientFrom, element.GradientTo, id, element.SVG)})
 		lowerXCounter += 100
 	}
 	row := &ElementRow{Elements: elements}
@@ -119,13 +120,15 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
                         Language{"Visual Basic", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/VisualBasic.svg")},
                         Language{"HTML5", "#FDBAA2", "#F1652A", svg.Read("./icons/languages/HTML.svg")},
 			Language{"CSS3", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/CSS.svg")},
+		).
+                WithRow(
                         Language{"Svelte", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Svelte.svg")},
 
 		)
 	io.WriteString(w, CreateSVG(1000, 1000, body.String()))
 }
 
-func AddLanguage(x_offset int, y_offset int16, gradient_from string, gradient_to string, id string, svg string) string {
+func AddLanguage(x_offset int, y_offset int, gradient_from string, gradient_to string, id string, svg string) string {
 	return fmt.Sprintf(`
 	<svg width="80" height="80" x="%d" y="%d">
 		<defs>
