@@ -21,6 +21,7 @@ Icons are from [Simple Icons](https://simpleicons.org/), [DevIcon](https://devic
   ```
 
 ## To-Do
+- WithParagraph to accept an Array of text, which will then call svg.Paragraph to determine the y-offset value
 - Dynamically adjust SVG instead of relying on fixed dimensions
 - Profile statistics
 - Rounded corners

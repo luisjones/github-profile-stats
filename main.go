@@ -34,12 +34,12 @@ func (b *Body) WithParagraph(paragraph string) *Body {
 	return b
 }
 func (b *Body) WithRow(content ...Language) *Body {
-        rows := 90 + (len(b.Rows) * 120)
+	rows := 80 + (len(b.Rows) * 120)
 	//var numberOfRowElements = len(content)
 	var lowerXCounter = 10
 	var elements []*Element
 	for elementNumber, element := range content {
-                id := fmt.Sprintf("%d_%d", len(b.Rows), elementNumber)
+		id := fmt.Sprintf("%d_%d", len(b.Rows), elementNumber)
 		elements = append(elements, &Element{Content: AddLanguage(lowerXCounter, rows, element.GradientFrom, element.GradientTo, id, element.SVG)})
 		lowerXCounter += 100
 	}
@@ -110,26 +110,49 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 			svg.Paragraph("Languages", 70),
 		).
 		WithParagraph(
-			svg.Paragraph("Frameworks", 200),
+			svg.Paragraph("Frameworks", 190),
+		).
+		WithParagraph(
+			svg.Paragraph("Tools", 310),
+		).
+		WithParagraph(
+			svg.Paragraph("Databases", 430),
 		).
 		WithRow(
 			Language{"Go", "#70D0ED", "#00CDBF", svg.Read("./icons/languages/Go.svg")},
 			Language{"JavaScript", "#FFE693", "#E4A125", svg.Read("./icons/languages/JavaScript.svg")},
-                        Language{"TypeScript", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/TypeScript.svg")},
-                        Language{"Python", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/Python.svg")},
-                        Language{"Visual Basic", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/VisualBasic.svg")},
-                        Language{"HTML5", "#FDBAA2", "#F1652A", svg.Read("./icons/languages/HTML.svg")},
+			Language{"TypeScript", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/TypeScript.svg")},
+			Language{"Python", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/Python.svg")},
+			Language{"Visual Basic", "#AFD3FC", "#2E79C7", svg.Read("./icons/languages/VisualBasic.svg")},
+			Language{"HTML5", "#FDBAA2", "#F1652A", svg.Read("./icons/languages/HTML.svg")},
 			Language{"CSS3", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/CSS.svg")},
+			Language{"XML", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/XML.svg")},
+			Language{"YAML", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/YAML.svg")},
+			Language{"Marldown", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/Markdown.svg")},
+			Language{"JSON", "#A7C1FD", "#2865F0", svg.Read("./icons/languages/JSON.svg")},
 		).
-                WithRow(
-                        Language{"Svelte", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Svelte.svg")},
-                        Language{"Preact", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Preact.svg")},
-                        Language{"React", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/React.svg")},
-                        Language{"Ionic", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Ionic.svg")},
-
-
+		WithRow(
+			Language{"Svelte", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Svelte.svg")},
+			Language{"Preact", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Preact.svg")},
+			Language{"React", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/React.svg")},
+			Language{"Ionic", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Ionic.svg")},
+			Language{"Tailwind", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Tailwind.svg")},
+			Language{"Express", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Express.svg")},
+			Language{"Next", "#FFB7A6", "#F83A01", svg.Read("./icons/frameworks/Next.svg")},
+		).
+		WithRow(
+			Language{"Nginx", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/Nginx.svg")},
+			Language{"Apache", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/Apache.svg")},
+			Language{"Git", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/Git.svg")},
+			Language{"NPM", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/NPM.svg")},
+		).
+		WithRow(
+			Language{"Postgres", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/Postgres.svg")},
+			Language{"Mongo", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/Mongo.svg")},
+			Language{"SQLite", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/SQLite.svg")},
+			Language{"SQLAlchemy", "#FFB7A6", "#F83A01", svg.Read("./icons/tools/SQLAlchemy.svg")},
 		)
-	io.WriteString(w, CreateSVG(1000, 1000, body.String()))
+	io.WriteString(w, CreateSVG(2000, 2000, body.String()))
 }
 
 func AddLanguage(x_offset int, y_offset int, gradient_from string, gradient_to string, id string, svg string) string {
