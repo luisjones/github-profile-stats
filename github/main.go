@@ -2,6 +2,8 @@ package github
 
 // GET /repos/{owner}/{repo}/languages
 
+var endpoint = "https://api.github.com"
+
 /*
 {
   "title": "Language",
