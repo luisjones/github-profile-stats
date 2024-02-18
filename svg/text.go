@@ -8,7 +8,7 @@ import (
 type TextCharacteristics struct {
 	ID         string
 	Colour      string
-	YOffset    int16
+	YOffset    int
 	FontSize   int8
 	FontFamily string
 	FontWeight int16
@@ -16,11 +16,11 @@ type TextCharacteristics struct {
 }
 
 
-func Title(text string, yoffset int16) string {
+func Title(text string, yoffset int) string {
     return Text(TextCharacteristics{strings.ToLower(text), "#000000", yoffset, 42, "Roboto-Medium, Roboto, sans-serif", 500, text})
 }
 
-func Paragraph(text string, yoffset int16) string {
+func Paragraph(text string, yoffset int) string {
     return Text(TextCharacteristics{strings.ToLower(text), "#bfbfbf", yoffset, 24, "Roboto-Regular, Roboto, sans-serif", 500, text})
 }
 
@@ -36,7 +36,7 @@ func CenterText(args TextCharacteristics, word string) float64 {
         wordLength := len(word)
         if wordLength > 4 {
             xValue = 10 + (75 - float64(wordLength) * 7.5) / 2.5
-        } else
+        } else {
             xValue = (75 - float64(wordLength) * 7.5) / 2.5
         }
         return xValue

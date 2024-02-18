@@ -29,7 +29,9 @@ func (b *Body) WithTitle(title string) *Body {
 	b.Title = title
 	return b
 }
-func (b *Body) WithParagraph(paragraph string) *Body {
+func (b *Body) WithParagraph(text string) *Body {
+        y := 70 + (len(b.Paragraphs) * 120)
+        paragraph := svg.Paragraph(text, y)
 	b.Paragraphs = append(b.Paragraphs, paragraph)
 	return b
 }
@@ -106,18 +108,10 @@ func GenerateSVG(w http.ResponseWriter, req *http.Request) {
 		WithTitle(
 			svg.Title("Skills", 44),
 		).
-		WithParagraph(
-			svg.Paragraph("Languages", 70),
-		).
-		WithParagraph(
-			svg.Paragraph("Frameworks", 190),
-		).
-		WithParagraph(
-			svg.Paragraph("Tools", 310),
-		).
-		WithParagraph(
-			svg.Paragraph("Databases", 430),
-		).
+		WithParagraph("Languages").
+		WithParagraph("Frameworks").
+                WithParagraph("Tools").
+                WithParagraph("Databases").
 		WithRow(
 			Language{"Go", "#70D0ED", "#00CDBF", svg.Read("./icons/languages/Go.svg")},
 			Language{"JavaScript", "#FFE693", "#E4A125", svg.Read("./icons/languages/JavaScript.svg")},

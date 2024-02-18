@@ -14,15 +14,15 @@ Icons are from [Simple Icons](https://simpleicons.org/), [DevIcon](https://devic
   go build
   ```
 3. **Run HTTP server:**
-- Navigate to the project directory.
-- Run the Go program to start the server, which will start at `http://localhost:8081` by default. 
+- Navigate to the project directory, and run the executable which will start at `http://localhost:8081` by default. 
+- Alternatively, Run the Go program by running:
   ```
   go run .
   ```
 
 ## To-Do
-- WithParagraph to accept an Array of text, which will then call svg.Paragraph to determine the y-offset value
-- Dynamically adjust SVG instead of relying on fixed dimensions
-- Profile statistics
-- Rounded corners
-- API Route Parameters
+- [ ] Profile Statistics by calling GitHub API
+- [ ] Rounded background SVG
+- [ ] API Route Parameters
+- [ ] Store colours in a local SQLite database
+- [ ] WithRow to accept a Title removing the need to call WithParagraph seperately
